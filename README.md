@@ -31,7 +31,17 @@ bilgisayarın USB portu yeterli), varsa bir VGA monitör.
 Test bitince JP1'i tekrar **QSPI** konumuna alabilirsiniz. Karttaki fabrika demosu
 **silinmez**, kart eskisi gibi açılır.
 
-> Bazı USB bellekleri kart tanımayabilir. Olmazsa küçük / eski bir bellek deneyin.
+## DONE ledi yanmazsa
+
+1. Başka bir USB bellek deneyin (küçük / eski bellekler daha sorunsuz olur).
+2. Yine olmazsa: kartı kapatın, JP1'i **QSPI** konumuna alın, USB belleği çıkarın ve
+   kartı tekrar açın. Kart, fabrikadan gelen kendi demosunu çalıştırır:
+   - Her anahtar üstündeki LED'i yakar.
+   - 7 segment ekran 0'dan 9'a sayar; U / L / R / D butonları birer haneyi söndürür,
+     C butonu tüm ekranı söndürür.
+   - VGA monitörde hareketli desenler görünür.
+
+   Bunu da videoya çekmeniz yeterli.
 
 ---
 
@@ -47,4 +57,15 @@ the QSPI flash.
 - **UART 9600 8N1:** prints `BASYS3 SELFTEST SW=xxxx BTN=CULRD` about once a second
 
 Built with the open-source [openXC7](https://github.com/openXC7) toolchain
-(yosys + nextpnr-xilinx). Run `./build.sh` (needs Docker).
+(yosys + nextpnr-xilinx). Run `./build.sh` (needs Docker). `fix_header.py` rewrites the
+`.bit` header in Vivado's style (part `7a35tcpg236`), matching Digilent's own Vivado-built
+demos; the configuration data is untouched.
+
+**If the stick won't load it:** to tell a board/stick problem from a bitstream problem, try
+Digilent's Vivado-built General I/O demo from the same stick. It's in the
+[Basys-3-GPIO release zip](https://github.com/Digilent/Basys-3-GPIO/releases/download/v2018.2-3/Basys-3-GPIO-2018.2-3.zip)
+at `vivado_proj/Basys-3-GPIO.runs/impl_1/GPIO_demo.bit`. (It isn't copied here because
+that repo has no license.)
+
+Status: logic verified in simulation (`tb.v`, Icarus Verilog) and pinout checked against
+Digilent's `Basys-3-Master.xdc`; not yet run on real hardware.
