@@ -39,6 +39,7 @@ run sh -c "
       --json build/top.json --fasm build/top.fasm --freq 100 &&
   fasm2frames --part $PART --db-root /db/artix7 build/top.fasm > build/top.frames &&
   xc7frames2bit --part_file /db/artix7/$PART/part.yaml --part_name $PART \
-      --frm_file build/top.frames --output_file selftest.bit
+      --frm_file build/top.frames --output_file build/top.bit &&
+  python3 fix_header.py build/top.bit selftest.bit
 "
 echo ">> built $HERE/selftest.bit"
