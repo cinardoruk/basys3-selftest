@@ -68,4 +68,7 @@ at `vivado_proj/Basys-3-GPIO.runs/impl_1/GPIO_demo.bit`. (It isn't copied here b
 that repo has no license.)
 
 Status: logic verified in simulation (`tb.v`, Icarus Verilog) and pinout checked against
-Digilent's `Basys-3-Master.xdc`; not yet run on real hardware.
+Digilent's `Basys-3-Master.xdc`. **Verified on a real Basys 3 (Nov 2026):** loads from a
+USB stick via the on-board loader (openXC7 bitstream with the Vivado-style header); the
+LED and 7-segment patterns run as designed with every LED and segment lighting.
+Switch, button, VGA and UART paths have not been exercised on hardware yet.
